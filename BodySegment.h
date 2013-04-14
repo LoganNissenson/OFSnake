@@ -1,31 +1,27 @@
 #pragma once
-#include <string>
-#include <vector>
-#include "BodySegment.h"
-#include "FoodMorsel.h"
 #include "ofGraphics.h"
 
-using namespace std;
-
-class Snake
+class BodySegment: public ofRectangle
 {
 public:
-  BodySegment head;
-	
-	Snake(int startLength, double initialHeadX, double initialHeadY);
+	static const double BodySegment::WIDTH;
+	static const double BodySegment::HEIGHT;
 
-	void eat(FoodMorsel foodJustEaten);
-	void setXDirection(int newXDirection);
-	void setYDirection(int newYDirection);
-	int getYDirection();
-	int getXDirection();
-	void move();
-	BodySegment getSegmentAt(int index);
-	int getBodyLength();
+	int getRedValue();
+	int getGreenValue();
+	int getBlueValue();
+	void setColor(int colorArray[3]);
+	void setRedValue(int color);
+	void setGreenValue(int color);
+	void setBlueValue(int color);
+	bool intersects(const ofRectangle& rect);
+	void draw();
 
+	BodySegment();
+	BodySegment(double x, double y, int colorArray[3]);
 private:
-	int x_direction;			// Varies between 1, and -1
-	int y_direction;			// Varies between 1, and -1
-	vector<BodySegment> body;	
+	int color[3];
+
 };
+
 
