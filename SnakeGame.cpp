@@ -145,10 +145,45 @@ void drawFood(FoodMorsel food){
 	ofRect(food.x, food.y, food.width, food.height);
 }
 
-bool snakeIsColliding(Snake snake){
-	// Code that checks to see if the snake is colliding with itself or the border
-	// This will be fairly straightforward if the Snake::intersects(ofRectangle) method is used
-	// returns true if the snake is colliding with something it shouldn't be
-	return false;	// Default set to false, the code will return true if there is a collision
+// Checks to see if the head of the snake is colliding with the boundry of the screen or with itself
+// returns true if the snake is colliding with something it shouldn't be
+bool snakeIsColliding(Snake &snake){
+	bool isSnakeColliding = false;
+	// Storing the head of the snake in variable
+	BodySegment snakeHead = snake.getSegmentAt(0);
+	isSnakeColliding = testSnake.isOutOfBounds(SCREEN_WIDTH, SCREEN_HEIGHT);	// If the snake is out of bounds, then the function returns true
+	for(int i=2; i < snake.getBodyLength() - 2; i++){
+		if(snakeHead.intersects(snake.getSegmentAt(i))){
+			isSnakeColliding = true;
+		}
+	}
+	return isSnakeColliding;	// Default set to false, the code will return true if there is a collision
 }
+
+// Draws the current score to the screen
+void drawScore(){
+	// Converting the integer game score to a string
+	string stringScore;
+	ostringstream convert;
+	convert << gameScore;
+	stringScore = convert.str();
+
+	// Drawing the string to the screen using the ofDrawBitmap string function
+	ofSetColor(255, 211, 155);	// Setting the color to a nice tan hue
+	float scoreStringXCoord = SCREEN_WIDTH/10;
+	float scoreStringYCoord = SCREEN_HEIGHT/7;
+	scoreFont.drawString(stringScore, scoreStringXCoord, scoreStringYCoord);
+
+}
+
+// Draws a pause screen
+void drawPauseScreen(){
+	ofSetColor(139, 26, 26);	// Setting the pause text to a firebrick color
+	float pauseStringXCoord = (SCREEN_WIDTH/2) - 100;
+	float pauseStringYCoord = SCREEN_HEIGHT/2;
+	pausedFont.drawString("Game Paused", pauseStringXCoord, pauseStringYCoord);
+	pausedFont.setLineHeight(10);
+	pausedFont.drawString("Press p to unpause", SCREEN_WIDTH/4, pauseStringYCoord + 90);
+}
+
 
