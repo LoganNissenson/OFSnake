@@ -91,3 +91,27 @@ int Snake::getXDirection(){
 int Snake::getYDirection(){
 	return y_direction;
 }
+
+bool Snake::isOutOfBounds(int screenWidth, int screenHeight){
+	BodySegment head = body[0];
+	if(y_direction){
+		if( head.y >= screenHeight || head.y <= 0)
+			return true;
+		else if((head.x + head.width) >= screenWidth || (head.x <= 0))
+			return true;
+		else
+			return false;
+	}
+	else{
+		if(head.x >= screenWidth || head.x <= 0){
+			return true;
+		}
+		else if((head.y + head.height) >= screenHeight || (head.y <= 0)){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
+
+}
