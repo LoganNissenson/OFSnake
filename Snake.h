@@ -22,6 +22,7 @@ public:
 	void move();
 	BodySegment getSegmentAt(int index);
 	int getBodyLength();
+	bool isOutOfBounds(int screenWidth, int screenHeight);
 
 private:
 	int x_direction;			// Varies between 1, and -1
