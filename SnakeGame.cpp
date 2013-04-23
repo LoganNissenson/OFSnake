@@ -35,7 +35,7 @@ void SnakeGame::update(){
 		testSnake.move();
 		if(snakeOverFood(testSnake, testFood)){
 			testSnake.eat(testFood);
-			// Function call to update score should be inserted here
+			gameScore += 5*testSnake.getBodyLength();
 			testFood.relocate(SCREEN_WIDTH, SCREEN_HEIGHT);
 		}
 		if(snakeIsColliding(testSnake))
@@ -49,13 +49,14 @@ void SnakeGame::draw(){
 	// is covering part of it up
 	drawSnake(testSnake);
 	drawFood(testFood);
+	drawScore();
 
 	if(game_state == "OVER"){
 		// Code to draw a game over screen
 	}
 
 	if(game_state == "PAUSED"){
-		// Code to draw a paused screen, prompting the user to press a button to un-pause the screen
+		drawPauseScreen();
 	}
 }
 
@@ -90,8 +91,17 @@ void SnakeGame::keyPressed(int key){
 		}
 	}
 
-	if(key == 'e'){
-		game_state = "OVER";	// Test button to see what happens when the "OVER" state is entered
+	if(key == 'p'){
+		// If the game is not paused and the game is not over, pause the game, otherwise start the game up again
+		if(game_state != "OVER"){
+			if(game_state == "PAUSED"){
+				game_state = "PLAYING";
+			}
+			else{
+				game_state = "PAUSED";	// Test button to see what happens when the "OVER" state is entered
+			}
+		}
+
 	}
 }
 
