@@ -10,8 +10,6 @@ using namespace std;
 class Snake
 {
 public:
-  BodySegment head;
-	
 	Snake(int startLength, double initialHeadX, double initialHeadY);
 
 	void eat(FoodMorsel foodJustEaten);
