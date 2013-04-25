@@ -25,6 +25,7 @@ public:
 	bool isOutOfBounds(int screenWidth, int screenHeight);
 
 private:
+	BodySegment head;
 	int x_direction;			// Varies between 1, and -1
 	int y_direction;			// Varies between 1, and -1
 	vector<BodySegment> body;	
