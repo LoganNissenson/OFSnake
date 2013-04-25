@@ -23,7 +23,7 @@ Snake::Snake(int startLength, double initialHeadX, double initialHeadY)
 	// Creating the body of the snake
 	body.push_back(head);
 	for(int i=1; i <= (startLength-1); i++){
-		BodySegment newSegment(i*(BodySegment::WIDTH) + head.x, head.y, initialHeadColor);
+		BodySegment newSegment(-x_direction*i*(BodySegment::WIDTH) + head.x, head.y, initialHeadColor);
 		body.push_back(newSegment);
 	}
 }
