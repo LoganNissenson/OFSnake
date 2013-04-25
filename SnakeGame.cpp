@@ -6,20 +6,24 @@
 #include <iostream>
 
 // Game constants
-const int SCREEN_WIDTH = 1024;
-const int SCREEN_HEIGHT = 768;
+const int SCREEN_WIDTH = 700;
+const int SCREEN_HEIGHT = 500;
 
 // Game variables
 FoodMorsel testFood;
 Snake testSnake(5,50,0);
 int gameScore = 0;
 string game_state;
+ofTrueTypeFont scoreFont;
+ofTrueTypeFont pausedFont;
 
 // Function prototypes
 void drawSnake(Snake snake);
 bool snakeOverFood(Snake &snake, FoodMorsel &food);
 void drawFood(FoodMorsel food);
 bool snakeIsColliding(Snake snake);
+void drawPauseScreen();
+void drawScore();
 
 //--------------------------------------------------------------
 void SnakeGame::setup(){
@@ -27,6 +31,10 @@ void SnakeGame::setup(){
 	testFood.relocate(SCREEN_WIDTH, SCREEN_HEIGHT);
 	gameScore = 0;
 	game_state = "PLAYING";	// The initial state is set as playing when the program begings
+	
+	// Loading the fonts that will be used in the game
+	scoreFont.loadFont("Xeron.ttf", 20);
+	pausedFont.loadFont("JoeJack.ttf", 20);	
 }
 
 //--------------------------------------------------------------
@@ -93,7 +101,7 @@ void SnakeGame::keyPressed(int key){
 
 	if(key == 'p'){
 		// If the game is not paused and the game is not over, pause the game, otherwise start the game up again
-		if(game_state != "OVER"){
+		if(game_state != "OVER" && game_state != "WELCOME"){
 			if(game_state == "PAUSED"){
 				game_state = "PLAYING";
 			}
