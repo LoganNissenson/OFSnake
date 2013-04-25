@@ -21,7 +21,7 @@ ofTrueTypeFont pausedFont;
 void drawSnake(Snake snake);
 bool snakeOverFood(Snake &snake, FoodMorsel &food);
 void drawFood(FoodMorsel food);
-bool snakeIsColliding(Snake snake);
+bool snakeIsColliding(Snake &snake);
 void drawPauseScreen();
 void drawScore();
 
